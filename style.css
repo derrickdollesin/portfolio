@@ -13,7 +13,6 @@ body {
   max-width: 100ch;
   margin-inline: max(1em, (100% - 100ch) / 2);
   padding: 1rem;
-  color: #222;
 }
 
 ul {
@@ -22,42 +21,50 @@ ul {
   margin: 0;
 }
 
-li {
-  display: inline-block; 
-}
-
 nav {
-  margin-bottom: 1rem;
-  border-bottom: 1px solid oklch(80% 3% 200); 
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  --border-color: oklch(50% 10% 200 / 40%);
+  border-bottom-color: var(--border-color);
 }
 
 nav ul {
   display: flex;
+  justify-content: space-around;
+  gap: 3rem;
   list-style: none;
   padding: 0;
-  margin: 0;
-  gap: 1rem;
+  margin: 0 auto;
+}
+
+nav ul li {
+  flex: none;
 }
 
 nav a {
-  flex: 1;                    
+  flex: 1;
   text-align: center;
-  text-decoration: none;           
-  color: inherit;                  
-  padding: 0.5em;
-  display: block;                  
+  text-decoration: none;
+  color: inherit;
+  padding: 0.4em;
+  display: block;
+  font-weight: 500;
+  position: relative;
 }
 
 nav a:hover {
   border-bottom: 0.4em solid var(--color-accent);
-  padding-bottom: 0.1em; 
-  background-color: oklch(from var(--color-accent) 95% 5% h); 
-  transition: all 0.2s ease-in-out;
+  padding-bottom: 0.4em;
+  background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
 }
 
 nav a.current {
-  border-bottom: 0.4em solid oklch(85% 3% 200); 
-  padding-bottom: 0.1em;                        
+  font-weight: bold;
+  padding-bottom: 0.4em;
+  border-bottom: 0.4em solid var(--border-color);
 }
 
 form {
@@ -89,7 +96,6 @@ button {
   padding: 0.5em 1em;
   font: inherit;
   background-color: var(--color-accent);
-  color: white;
   border: none;
   border-radius: 0.3em;
   cursor: pointer;
@@ -110,7 +116,6 @@ button:hover {
   display: grid;
   grid-template-rows: subgrid;
   grid-row: span 3;
-  background-color: white;
   padding: 1rem;
   border-radius: 0.5rem;
   border: 1px solid oklch(80% 3% 200);
@@ -214,4 +219,16 @@ article ul li {
   section h3 {
     font-size: 1.25rem;
   }
+}
+
+.color-scheme {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 80%;
+  font-family: inherit;
+  padding: 0.4em 0.6em;
+  border: 1px solid oklch(80% 3% 200);
+  border-radius: 0.4em;
+  z-index: 1000;
 }
