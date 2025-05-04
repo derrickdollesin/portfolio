@@ -124,3 +124,58 @@ form?.addEventListener('submit', (event) => {
   console.log('Opening:', fullURL);
   location.href = fullURL;
 });
+
+export async function fetchJSON(url) {
+    try {
+        // Fetch the JSON file from the given URL
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error(`Failed to fetch projects: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching or parsing JSON data:', error);
+    }
+    
+  }
+
+export function renderProjects(projects, containerElement, headingLevel = 'h2') {
+    // Your code will go here
+    if (!Array.isArray(projects)) {
+        console.error('renderProjects: Invalid project data');
+        return;
+    }
+    if (!(containerElement instanceof Element)) {
+        console.error('renderProjects: Invalid container element');
+        return;
+    }
+    
+    // Validate heading level
+    const validHeadings = ['h1','h2','h3','h4','h5','h6'];
+    if (!validHeadings.includes(headingLevel)) {
+        console.warn(`Invalid heading level "${headingLevel}", defaulting to h2`);
+        headingLevel = 'h2';
+    }
+    
+    // Clear old content
+    containerElement.innerHTML = '';
+    
+    for (const project of projects) {
+        const article = document.createElement('article');
+    
+        article.innerHTML = `
+            <${headingLevel}>${project.title ?? 'Untitled Project'}</${headingLevel}>
+            <img src="${project.image ?? ''}" alt="${project.title ?? 'project image'}">
+            <p>${project.description ?? 'No description available.'}</p>
+        `;
+    
+        containerElement.appendChild(article);
+    }
+}
+
+export async function fetchGitHubData(username) {
+    return fetchJSON(`https://api.github.com/users/derrickdollesin`);
+}
