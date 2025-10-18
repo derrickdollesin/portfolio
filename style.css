@@ -103,3 +103,28 @@ Home
 .home {
     text-align: center;
 }
+
+/*
+Light/Dark Mode
+*/
+html {
+    color-scheme: light dark;
+}
+
+nav {
+    --border-color: oklch(50% 10% 200 / 40%);
+    /* ... other styles and nested rules ... */
+    border-bottom-color: var(--border-color);
+}
+
+nav a:hover {
+    background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
+}
+
+label.color-scheme {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    font-family: inherit;
+    font-size: 80%;
+}
