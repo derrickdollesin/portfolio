@@ -128,3 +128,22 @@ label.color-scheme {
     font-family: inherit;
     font-size: 80%;
 }
+
+#profile-stats dl {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* four equal columns */
+  text-align: center;
+  gap: 0.5rem; /* optional spacing */
+}
+
+/* Put all dt elements in the first row */
+#profile-stats dt {
+  grid-row: 1;
+  font-weight: bold;
+}
+
+/* Put all dd elements in the second row */
+#profile-stats dd {
+  grid-row: 2;
+  margin: 0;
+}

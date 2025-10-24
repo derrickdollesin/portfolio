@@ -146,3 +146,11 @@ export function renderProjects(project, containerElement, headingLevel = 'h2') {
   }
 
 }
+
+/* GitHub */
+export async function fetchGithubData(username) {
+  // return statement here
+  return fetchJSON(`https://api.github.com/users/${username}`);
+}
+
+
