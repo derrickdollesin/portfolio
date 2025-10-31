@@ -100,9 +100,9 @@ h1 {
 Home
 */
 
-.home {
+/* .home {
     text-align: center;
-}
+} */
 
 /*
 Light/Dark Mode
@@ -146,4 +146,80 @@ label.color-scheme {
 #profile-stats dd {
   grid-row: 2;
   margin: 0;
+}
+
+.year {
+    font-family: Baskerville;
+    font-variant-numeric: oldstyle-nums
+}
+
+/* circle */
+
+.projects-pie-plot {
+  max-width: 20em;
+  margin-block: 2em;
+
+  overflow: visible;
+}
+
+/* Legend */
+.legend {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
+    list-style: none;
+    border: 1.4px solid oklch(80% 3% 200);
+    border-radius: 10px;
+    padding: 1em;
+    gap: 0.5em 0.3em;
+    flex: 1;
+}
+
+.legend .element {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.3em 0;
+}
+
+.legend .swatch {
+    width: 1em;
+    height: 1em;
+    background-color: var(--color);
+    border-radius: 50%;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    gap: 2em;
+}
+
+.searchBar {
+  display: block;
+  width: 100%;           /* ✅ full width of its parent */
+  box-sizing: border-box; /* ✅ include padding/border in width calc */
+  padding: 0.6em 1em;
+  margin-bottom: 1em;
+  font: inherit;
+  border: 1.4px solid oklch(80% 3% 200);
+  border-radius: 8px;
+}
+
+&:has(path:hover) {
+  path:not(:hover) {
+    opacity: 0.5;
+  }
+}
+
+path {
+  transition: 300ms;
+  cursor: pointer;
+}
+
+.selected {
+  --color: oklch(60% 45% 0) !important;
+
+  &:is(path) {
+    fill: var(--color);
+  }
 }
