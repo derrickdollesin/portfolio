@@ -20,6 +20,7 @@ let pages = [
   // add the rest of your pages 
   { url: 'resume/', title: 'Resume'},
   { url: 'contact/', title: 'Contact'},
+  { url: 'meta/', title: 'Meta' },
   { url: 'https://github.com/derrickdollesin/', title: 'GitHub'},
 ];
 

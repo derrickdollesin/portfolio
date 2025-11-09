@@ -223,3 +223,171 @@ path {
     fill: var(--color);
   }
 }
+
+/* meta */
+
+/* Lighten the gridlines for the scatterplot */
+.gridlines path,
+.gridlines line {
+  stroke: #d0d7de;          /* light gray (GitHub-like tone) */
+  stroke-opacity: 0.4;      /* make it subtle */
+  shape-rendering: crispEdges;
+}
+
+circle {
+  transition: 200ms;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+circle:hover {
+  transform: scale(1.5);
+}
+
+/* Step 3.2 – visual styling only (no show/hide yet) */
+#commit-tooltip {
+  position: absolute;
+  top: 1rem;          /* park it near the top-left for now */
+  left: 1rem;
+  max-width: 22rem;
+  padding: 0.6rem 0.9rem;
+  margin: 0;
+
+  /* Tooltip look */
+  background-color: rgba(255, 255, 255, 0.9);  /* soft white */
+  border-radius: 0.6rem;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(6px);
+
+  /* Text */
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: #222;
+
+  /* IMPORTANT: do NOT hide it yet */
+  /* no opacity: 0; no visibility: hidden; */
+  pointer-events: none; /* so it doesn’t steal hover from the chart */
+  z-index: 20;
+}
+
+/* Labels inside tooltip */
+#commit-tooltip dt {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: #555;
+  margin: 0 0 0.15rem;
+}
+
+/* Values inside tooltip */
+#commit-tooltip dd {
+  margin: 0 0 0.4rem;
+  color: #111;
+}
+
+/* Link styling */
+#commit-tooltip a {
+  color: steelblue;
+  text-decoration: none;
+  word-break: break-all;
+}
+
+#commit-tooltip a:hover {
+  text-decoration: underline;
+}
+
+dl.info {
+  /* ... other styles ... */
+  transition-duration: 500ms;
+  transition-property: opacity, visibility;
+}
+
+dl.info[hidden]:not(:hover, :focus-within) {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* --- Stats container --- */
+#stats {
+  margin-block: 2rem;
+  padding: 1rem 1.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid oklch(85% 0.03 250 / 0.8);
+  background: color-mix(in oklch, canvas 94%, black 6%);
+  box-shadow: 0 6px 18px oklch(0% 0 0 / 0.06);
+
+  /* Make sure it never blows past the page width */
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto;  /* safety net if something is insanely long */
+}
+
+/* The <dl class="stats"> inside #stats */
+#stats .stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  column-gap: 1.5rem;
+  row-gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+/* Labels */
+#stats dt {
+  grid-row: 1;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: oklch(40% 0.07 250);
+  margin: 0 0 0.15rem;
+}
+
+/* Values */
+#stats dd {
+  grid-row: 2;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: oklch(20% 0.05 250);
+  margin: 0;
+
+  /* Prevent long file paths from pushing layout sideways */
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* Slightly tighter on very small screens */
+@media (max-width: 600px) {
+  #stats {
+    padding-inline: 0.75rem;
+  }
+
+  #stats .stats {
+    grid-template-columns: 1fr;
+  }
+
+  #stats dd {
+    font-size: 1rem;
+  }
+}
+
+@keyframes marching-ants {
+  to {
+    stroke-dashoffset: -8; /* 5 + 3 */
+  }
+}
+
+.selection {
+  fill-opacity: 0.1;
+  stroke: black;
+  stroke-opacity: 0.7;
+  stroke-dasharray: 5 3;
+  animation: marching-ants 2s linear infinite;
+}
+
+circle.selected {
+  fill: #ff6b6b;
+}
