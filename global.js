@@ -27,30 +27,30 @@ let pages = [
 let nav = document.createElement('nav');
 document.body.prepend(nav);
 
-const BASE_PATH = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
-  ? "/"                  // Local server
-  : "/website/";         // GitHub Pages repo name
+const isLocal =
+  location.hostname === "localhost" || location.hostname === "127.0.0.1";
 
+const BASE_PATH = isLocal ? "/" : "/portfolio/";
 
 for (let p of pages) {
   let url = p.url;
-  let title = p.title;
 
-  url = !url.startsWith('http') ? BASE_PATH + url : url;
+  if (!url.startsWith("http")) {
+    url = BASE_PATH + url;
+  }
 
-  // next step: create link and add it to nav
-  let a = document.createElement('a');
+  let a = document.createElement("a");
   a.href = url;
-  a.textContent = title;
+  a.textContent = p.title;
 
-  if (a.host != location.host) {
-    a.target = '_blank'
+  if (a.host !== location.host) {
+    a.target = "_blank";
   }
 
   a.classList.toggle(
-    'current',
-    a.host === location.host && a.pathname === location.pathname,
-  );  
+    "current",
+    a.host === location.host && a.pathname === location.pathname
+  );
 
   nav.append(a);
 }
